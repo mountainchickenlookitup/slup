@@ -1,19 +1,21 @@
-\RequirePackage[utf8x]{inputenc}
-\RequirePackage[english, russian]{babel}
-\RequirePackage{ellipsis}
-\RequirePackage{amsthm}
-\RequirePackage{amssymb}
-\RequirePackage{amsmath}
-\RequirePackage[framemethod=default]{mdframed}
-\RequirePackage{xcolor}
-\RequirePackage{hyperref}
-\RequirePackage{fancyhdr}
-\RequirePackage{color}
-\RequirePackage{xspace}
-\RequirePackage{graphicx}
+\ProvidesPackage{mathstyle}
 
-\definecolor{linkcolor}{HTML}{799B03} % цвет ссылок
-\definecolor{urlcolor}{HTML}{0988BA} % цвет гиперссылок
+\usepackage[utf8x]{inputenc}
+\usepackage{index}
+\usepackage[english, russian]{babel}
+\usepackage{ellipsis}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+%\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{color}
+\usepackage{xspace}
+\usepackage{graphicx}
+
+\definecolor{linkcolor}{RGB}{190, 0, 0} % links color
 \hypersetup{pdfstartview=FitH,  linkcolor=linkcolor,urlcolor=urlcolor, colorlinks=true}
 
 \newcommand{\sd}{\smallskip}
@@ -36,7 +38,7 @@
 \labelwidth=20pt
 \itemindent=0pt
 \listparindent=0pt
-\parsep=0pt plus 1pt 
+\parsep=0pt plus 1pt
 \itemsep=\parsep
 \topsep=\parsep
 \partopsep=2pt plus 1pt minus 1pt}

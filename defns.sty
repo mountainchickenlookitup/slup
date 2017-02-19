@@ -1,0 +1,35 @@
+\errorcontextlines10
+\def\traceon{\tracingcommands2\tracingmacros2 }
+\def\traceoff{\tracingcommands0\tracingmacros0 }
+\def\showboxes{\showboxdepth5\showboxbreadth100 }
+\def\myshowlists{{\showboxdepth0\showboxbreadth1000\showlists}}
+
+
+\def\AddTo#1#2{\expandafter\def\expandafter#1\expandafter{#1#2}}
+
+
+\def\AddIfxTo#1#2{%
+        \def\defns@temp##1{\def#1{\ifx\@let@token#2\else##1\fi}}%
+        \expandafter\defns@temp\expandafter{#1}%
+    }
+
+
+\def\AddIfxTo@one#1#2{%
+        \def\defns@temp##1{\def#1####1{\ifx\@let@token#2\else##1\fi}}%
+        \expandafter\defns@temp\expandafter{#1{##1}}%
+    }
+
+\def\proc@active#1#2{%
+        \bgroup
+            \ifx\^^M#2
+                \lccode`\~`\^^M%
+            \else
+                \lccode`\~\expandafter`\string#2%
+            \fi
+            \lowercase{%
+        \egroup
+                #1~%
+            }%
+    }
+
+\endinput

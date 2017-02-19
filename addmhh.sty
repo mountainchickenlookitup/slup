@@ -1,0 +1,72 @@
+\RequirePackage{defns}
+
+\binoppenalty=10000
+\relpenalty=10000
+
+\DeclareRobustCommand\mh[1]{%
+        #1\nobreak
+        \discretionary{}{\hbox{$#1$}}{}
+    }
+
+\escapechar-1
+
+\def\addmh@symb#1{%
+        \expandafter\mathchardef\csname mh@#1\endcsname=\the\mathcode`#1%
+        \proc@active\edef{#1}{\noexpand\mh\csname mh@#1\endcsname}%
+        \everymath\expandafter{\the\everymath\catcode`#1\active}%
+    }
+%\@onlypreamble\addmh@symb
+\def\addmh@cs#1{%
+        \expandafter\let\csname mh@\string#1\endcsname#1%
+        \edef#1{%
+                \noexpand\mh
+                \expandafter\noexpand\csname mh@\string#1\endcsname
+            }%
+    }
+%\@onlypreamble\addmh@cs
+
+\newcommand\sveq{=}
+\addmh@symb =
+
+\addmh@symb +
+
+%\iffalse
+\addmh@symb < 
+\addmh@symb > 
+\addmh@symb *
+\let\svmin-
+\addmh@symb -
+
+\addmh@cs \sveq
+\addmh@cs \svmin
+\addmh@cs \cap
+\addmh@cs \cdot
+\addmh@cs \cup
+%\addmh@cs \ldots
+\addmh@cs \dots@symbol
+\addmh@cs \equiv
+\addmh@cs \ge
+\addmh@cs \in
+\addmh@cs \le
+\addmh@cs \mathamp
+\addmh@cs \ne
+\addmh@cs \notin
+\addmh@cs \nsubseteq
+\addmh@cs \subset
+\addmh@cs \subseteq
+\addmh@cs \supset
+\addmh@cs \supseteq
+\addmh@cs \times
+\addmh@cs \vee
+\addmh@cs \to
+\addmh@cs \parallel
+
+%\let\addmh@symb\relax
+%\let\addmh@cs\relax
+%\fi
+
+\escapechar`\\
+
+\def\nohm#1{\the\everymath\catcode`#1=12 #1}
+
+\endinput

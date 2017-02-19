@@ -1,0 +1,48 @@
+\RequirePackage[utf8x]{inputenc}
+\RequirePackage[english, russian]{babel}
+\RequirePackage{ellipsis}
+\RequirePackage{amsthm}
+\RequirePackage{amssymb}
+\RequirePackage{amsmath}
+\RequirePackage[framemethod=default]{mdframed}
+\RequirePackage{xcolor}
+\RequirePackage{hyperref}
+\RequirePackage{fancyhdr}
+\RequirePackage{color}
+\RequirePackage{xspace}
+\RequirePackage{graphicx}
+
+\definecolor{linkcolor}{HTML}{799B03} % цвет ссылок
+\definecolor{urlcolor}{HTML}{0988BA} % цвет гиперссылок
+\hypersetup{pdfstartview=FitH,  linkcolor=linkcolor,urlcolor=urlcolor, colorlinks=true}
+
+\newcommand{\sd}{\smallskip}
+\newcommand{\md}{\medskip}
+\newcommand{\bd}{\bigskip}
+
+
+\newdimen\ellipsiskern
+\setlength{\ellipsiskern}{.1em}
+\xspaceaddexceptions{ > ) }
+\newcommand{\ldotst}{.\kern\ellipsiskern.\kern\ellipsiskern.\xspace}
+\newcommand{\ldotse}{!\kern\ellipsiskern.\kern\ellipsiskern.\xspace}
+\newcommand{\ldotsq}{?\kern\ellipsiskern\kern-.11em.\kern\ellipsiskern.\xspace}
+
+% list
+\renewcommand{\@listI}{%
+\leftmargin=25pt
+\rightmargin=0pt
+\labelsep=5pt
+\labelwidth=20pt
+\itemindent=0pt
+\listparindent=0pt
+\parsep=0pt plus 1pt 
+\itemsep=\parsep
+\topsep=\parsep
+\partopsep=2pt plus 1pt minus 1pt}
+
+\pagestyle{plain}
+
+\date{}
+\frenchspacing
+\righthyphenmin=2

@@ -1,0 +1,487 @@
+\documentclass[a4paper]{article}
+\usepackage{matanstyle}
+\usepackage{ mathrsfs }
+\usepackage{ amssymb }
+\usepackage{amsmath}
+
+%\def\thm{{\bfseries Теорема}\; }
+%\def\proof{{\bfseries Доказательство}\; }
+%\def\defin{{\bfseries Определение}\; }
+%\def\comm{{\bfseries Замечание}\; }
+%\def\lemma{{\bfseries Лемма}\; }
+%\def\corol{{\bfseries Следствие}\; }
+
+\newcommand{\Expect}{\mathsf{E}}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Теорема}[section]
+\newtheorem{lem}[thm]{Лемма}
+\newtheorem{prop}[thm]{Предложение}
+\newtheorem*{cor}{Следствие}
+
+\theoremstyle{definition}
+\newtheorem{defn}{Определение}[section]
+\newtheorem{exmp}{Пример}[section]
+\newtheorem{mode}{Описание модели}[section]
+
+\theoremstyle{remark}
+\newtheorem*{rem}{Замечание}
+
+\begin{document}
+\tableofcontents
+
+\section[Лекция от 08.02.17. Случайные блуждания]{Лекция от 08.02.17\\ {\large Случайные блуждания}}
+
+\subsection{Понятие случайного блуждания}
+
+\begin{defn}
+  Пусть $V$ "--- множество, а $\mathscr{A}$ — $\sigma$-алгебра его подмножеств. Тогда ($V$, $\mathscr{A}$) называется \emph{измеримым пространством}.
+\end{defn}
+
+\begin{defn}
+  Пусть есть ($V$, $\mathscr{A}$) и ($S$, $\mathscr{B}$) "--- два измеримых пространства, $f$: $V$ $\rightarrow$ $S$ "--- отображение. $f$ называется \emph{$\mathscr{A}$|$\mathscr{B}$-измеримым}, если $\forall$B$\in\mathscr{B}$ $f^{-1}(B)\in\mathscr{A}$. \emph{Обозначение}: $f\in\mathscr{A}|\mathscr{B}$.
+\end{defn}
+
+\begin{defn}
+  Пусть есть $(\Omega, \mathscr{F}, \Prob)$ "--- вероятностное пространство, \linebreak($S$, $\mathscr{B}$) "--- измеримое пространство, $Y$: $\Omega$ $\rightarrow$ $S$ "--- отображение. Если $Y\in\mathscr{F}|\mathscr{B}$, то $Y$ называется \emph{случайным элементом}.
+\end{defn}
+
+\begin{defn}
+  Пусть $(\Omega, \mathscr{F}, \Prob)$ "--- вероятностное пространство, \linebreak($S$, $\mathscr{B}$) "--- измеримое пространство, $Y$: $\Omega$ $\rightarrow$ $S$ "--- случайный элемент. \emph{Распределение вероятностей, индуцированное случайным элементом $Y$}, "--- это функция на множествах из $\mathscr{B}$, задаваемая равенством
+
+  \begin{equation*}
+    \Prob_{Y}(B):= \Prob(Y^{-1}(B)), \quad B\in\mathscr{B}.
+  \end{equation*}
+\end{defn}
+
+\begin{defn}
+  Пусть $(S_{t}, \mathscr{B}_{t})_{t \in T}$ "--- семейство измеримых пространств. \emph{Случайный процесс, ассоциированный с этим семейством}, "--- это семейство случайных элементов $X$ = $\lbrace X(t){,} t \in T \rbrace$, где $X(t)$: $\Omega$ $\rightarrow$ $S_{t}$, $X(t)$ $\in$ $\mathscr{F}|\mathscr{B}_{t}$ \linebreak $\forall$t $\in$ $T$. Здесь $T$ "--- это произвольное параметрическое множество, ($S_{t}$, $\mathscr{B}_{t}$) "--- произвольные измеримые пространства.
+\end{defn}
+
+\begin{rem}
+  Если T $\subset$ $\mathbb{R}$, то $t \in T$ интерпретируется как время. Если \linebreak $T = \mathbb{R}$, то время \emph{непрерывно}; если $T = \mathbb{Z}$ или $T = \mathbb{Z}_{+}$, то время \emph{дискретно}; если $T$ $\subset$ $\mathbb{R}^{d}$, то говорят о \emph{случайном поле}.
+\end{rem}
+
+\begin{defn}
+  Случайные элементы $X_{1}$, \ldots, $X_{n}$ называются \emph{независимыми}, если $\Prob\left(\bigcap\limits_{k=1}^n \left\lbrace X_{k} \in  B_{k}\right\rbrace \right) = \prod\limits_{k=1}^n \Prob(X_{k} \in B_{k})$  $\forall B_{1} \in \mathscr{B}_{1}$, \ldots, $B_{n} \in \mathscr{B}_{n}$.
+\end{defn}
+
+\begin{thm}[Ломницкого-Улама]
+  Пусть $(S_{t}, \mathscr{B}_{t}, Q_{t})_{t \in  T}$ "--- семейство вероятностных пространств. Тогда на некотором $(\Omega, \mathscr{F}, \Prob)$ существует семейство \emph{независимых} случайных элементов $X_{t}$: $\Omega$ $\rightarrow$ $S_{t}$, $X_{t} \in \mathscr{F}|\mathscr{B}_{t}$ таких, что $\Prob_{X_{t}} = Q_{t}$, $t \in T$.
+\end{thm}
+
+\begin{rem}
+  Это значит, что на некотором вероятностном пространстве можно задать независимое семейство случайных элементов с наперед указанными распределениеми. При этом $T$ по-прежнему любое, как и $(S_{t}, \mathscr{B}_{t}, \mathbb{Q})_{t \in T}$ "--- произвольные вероятностные пространства. Независимость здесь означает независимость в совокупности $\forall$ конечного поднабора.
+\end{rem}
+
+\subsection{Случайные блуждания}
+
+\begin{defn}
+  Пусть $X$, $X_{1}$, $X_{2}$, \ldots - независимые одинаково распределенные случайные векторы со значениями в $\mathbb{R}^{d}$. \emph{Случайным блужданием в $\mathbb{R}^{d}$} называется случайный процесс с дискретным временем $S = \lbrace S_{n}, n \geqslant 0 \rbrace$ ($n \in \mathbb{Z}_{+}$) такой, что
+  \begin{align*}
+    S_{0} &:= x \in \mathbb{R}^{d} \quad\text{(начальная точка)};\\
+    S_{n} &:= x + X_{1} + \ldots + X_{n}, \quad n \in \mathbb{N}.
+  \end{align*}
+\end{defn}
+
+\begin{defn}
+  \emph{Простое случайное блуждание в $\mathbb{Z}^{d}$} "--- это такое случайное блуждание, что
+  \begin{equation*}
+    \Prob(X = e_{k}) = \Prob(X = -e_{k}) = \frac{1}{2d},
+  \end{equation*}
+  где $e_{k} = (0, \ldots, 0, \underbrace{1}_{k}, 0, \ldots, 0)$, $k = 1, \ldots, d$.
+\end{defn}
+
+\begin{defn}
+  Введем N := $\sum\limits_{n=0}^\infty \mathbb{I} \lbrace S_{n} = 0 \rbrace$ ($\leqslant \infty$). Это, по сути, число попаданий нашего процесса в точку 0. Простое случайное блуждание $S = \lbrace S_{n}, n \geqslant 0\rbrace$ называется \emph{возвратным}, если $\Prob(N = \infty) = 1$; \emph{невозвратным}, если $\Prob(N < \infty) = 1$.
+\end{defn}
+
+\begin{rem}
+  Следует понимать, что хотя определение подразумевает, что $\Prob(N = \infty)$ равно либо 0, либо 1, пока что это является недоказанным фактом. Это свойство будет следовать из следующей леммы.
+\end{rem}
+
+\begin{rem}[\emph{от наборщика}]
+  Судя по всему, в лемме ниже подразумевается, что начальная точка нашего случайного блуждания "--- это 0.
+\end{rem}
+\begin{defn}
+  Число $\tau := \inf\lbrace n \in \mathbb{N} : S_{n} = 0 \rbrace$ ($\tau := \infty$, если $S_{n} \neq 0$ $\forall n \in N$) называется \emph{моментом первого возвращения в 0}.
+\end{defn}
+
+\begin{lem}
+  Для  $ \forall n \in \mathbb{N} \; \Prob(N = n)  =  \Prob(\tau = \infty)\Prob(\tau < \infty)^{n-1}$.
+\end{lem}
+
+\begin{proof}
+  При $n = 1$ формула верна: $\lbrace N = 1 \rbrace = \lbrace \tau = \infty \rbrace$. Докажем по индукции.
+
+  \begin{multline*}
+    \Prob(N = n+1, \tau < \infty) = \sum_{k=1}^{\infty} \Prob(N = n+1, \tau = k) =\\
+    = \sum_{k=1}^{\infty} \Prob\left( \sum_{m=0}^{\infty} \mathbb{I} \lbrace S_{m+k} - S_{k} = 0 \rbrace = n, \tau = k\right) =\\
+    = \sum_{k=1}^{\infty} \Prob\left( \sum\limits_{m=0}^{\infty} \mathbb{I} \left\lbrace S_{m} = 0 \right\rbrace = n\right)\Prob(\tau = k) =\\
+    = \sum\limits_{k=1}^{\infty} \Prob(N^{\prime} = n)\Prob(\tau = k),
+  \end{multline*}
+  где $N^{\prime}$ определяется по последовательности $X_{1}^{\prime} = X_{k+1}$, $X_{2}^{\prime} = X_{k+2}$ и так далее. Из того, что $X_{i}$ --- независиые одинаково распределенные случайные векторы, следует, что $N^{\prime}$ и $N$ распределены одинаково. Таким образом, получаем, что
+  \begin{equation*}
+    \Prob(N = n+1, \tau < \infty) = \Prob(N = n)\Prob(\tau < \infty).
+  \end{equation*}
+  Заметим теперь, что
+  \begin{equation*}
+    \Prob(N = n+1) = \Prob(N = n+1, \tau < \infty) + \Prob(N = n+1, \tau = \infty),
+  \end{equation*}
+  где второе слагаемое обнуляется из-за того, что $n+1 \geqslant 2$. Из этого следует, что
+  \begin{equation*}
+    \Prob(N = n+1) = \Prob(N = n)\Prob(\tau < \infty).
+  \end{equation*}
+  Пользуемся предположением индукции и получаем, что
+  \begin{equation*}
+    \Prob(N = n+1) = \Prob(\tau = \infty)\Prob(\tau < \infty)^{n},
+  \end{equation*}
+  что и завершает доказательство леммы.
+\end{proof}
+
+\begin{cor}
+  $\Prob(N = \infty)$ равно 0 или 1. $\Prob(N < \infty) = 1 \Leftrightarrow \Prob(\tau < \infty) < 1$.
+\end{cor}
+
+\begin{proof}
+  Пусть $\Prob(\tau < \infty) < 1$. Тогда
+  \begin{flushleft}
+    $\Prob(N < \infty) = \sum\limits_{n=1}^{\infty} \Prob(N = n) = \sum\limits_{n=1}^{\infty} \Prob(\tau = \infty) \Prob(\tau < \infty)^{n-1} = \frac{\Prob(\tau = \infty)}{1 - \Prob(\tau < \infty)} = \qquad = \frac{\Prob(\tau = \infty)}{\Prob(\tau = \infty)} = 1$.
+  \end{flushleft}
+  Это доказывает первое утверждение следствия и импликацию справа налево в формулировке следствия. Докажем импликацию слева направо.
+  \begin{flushleft}
+    $\Prob(\tau < \infty) = 1 \Rightarrow \Prob \left((\tau = \infty ) = 0 \right) \Rightarrow \Prob(N = n) = 0$ $\forall n \in \mathbb{N} \Rightarrow \Prob(N < \infty) = 0$.
+  \end{flushleft}
+  Следствие доказано.
+\end{proof}
+
+\begin{thm}
+  Простое случайное блуждание в $\mathbb{Z}^{d}$ возвратно $\Leftrightarrow$ $\Expect N = \infty$ (соответственно, невозвратно $\Leftrightarrow$ $\Expect N < \infty$).
+\end{thm}
+
+\begin{proof}
+  Если $\Expect N < \infty$, то $\Prob(N<\infty) = 1$.
+  Пусть теперь $\Prob(N<\infty) = 1$. Это равносильно тому, что $\Prob(\tau < \infty) < 1$.
+  \begin{multline*}
+    \Expect N = \sum\limits_{n=1}^{\infty} n\Prob(N=n) = \sum\limits_{n=1}^{\infty} n\Prob(\tau = \infty)\Prob(\tau < \infty)^{n-1} = \\ =\Prob(\tau = \infty)\sum\limits_{n=1}^{\infty} n\Prob(\tau < \infty)^{n-1}.
+  \end{multline*}
+  Заметим, что
+  \begin{equation*}
+    \sum\limits_{n=1}^{\infty} np^{n-1} = (\sum\limits_{n=1}^{\infty} p^{n})^{\prime} = (\frac{1}{1-p})^{\prime} = \frac{1}{(1-p)^{2}}.
+  \end{equation*}
+  Тогда, продолжая цепочку равенств, получаем, что
+  \begin{equation*}
+    \Prob(\tau = \infty)\sum\limits_{n=1}^{\infty} n\Prob(\tau < \infty)^{n-1} = \frac{\Prob(\tau = \infty)}{(1 - \Prob(\tau < \infty))^{2}} = \frac{1}{1 - \Prob(\tau < \infty)},
+  \end{equation*}
+  что завершает доказательство теоремы.
+\end{proof}
+
+\begin{rem}
+  Заметим, что поскольку $N = \sum\limits_{n=0}^{\infty} \mathbb{I} \lbrace S_{n} = 0 \rbrace$, то
+  \begin{equation*}
+    \Expect N = \sum\limits_{n=0}^{\infty} \Expect \mathbb{I} \lbrace S_{n} = 0 \rbrace = \sum\limits_{n=0}^{\infty} \Prob(S_{n} = 0),
+  \end{equation*}
+  где перестановка местами знаков матожидания и суммы возможна в силу неотрицательности членов ряда. Таким образом, \begin{center}
+    S возвратно $\Leftrightarrow$ $\sum\limits_{n=0}^{\infty} \Prob(S_{n} = 0) = \infty$.
+  \end{center}
+\end{rem}
+
+\begin{cor}
+  $S$ возвратно при $d = 1$ и $d = 2$.
+\end{cor}
+
+\begin{proof}
+  $\Prob(S_{2n} = 0) = (\frac{1}{2d})^{2n} \sum_{\substack{n_{1}, \ldots, n_{d} \geqslant 0 \\ n_{1} + \ldots + n_{d} = n}} \frac{(2n)!}{(n_{1}!)^{2} \ldots (n_{d}!)^{2}}$.
+  \begin{flushleft}
+    \emph{Случай d = 1}: $\Prob(S_{2n} = 0) = \frac{(2n)!}{(n!)^{2}}(\frac{1}{2})^{2n}$.
+  \end{flushleft}Согласно формуле Стирлинга,
+  \begin{equation*}
+    m! \sim \left(\frac{m}{e}\right)^{m} \sqrt{2 \pi m}, \quad m \rightarrow \infty.
+  \end{equation*}
+  Соответственно,
+  \begin{equation*}
+    \Prob(S_{2n} = 0) \sim \frac{1}{\sqrt{\pi n}} \Rightarrow
+  \end{equation*}
+  $\Rightarrow$ ряд $\sum\limits_{n=0}^{\infty} \frac{1}{\sqrt{\pi n}} = \infty \Rightarrow$ блуждание возвратно.
+  Аналогично рассматривается \emph{случай d = 2}: $\Prob(S_{2n} = 0) = \ldots = \left\lbrace \frac{(2n)!}{(n!)^{2}}(\frac{1}{2})^{2n} \right\rbrace ^{2}$ $\sim \frac{1}{\pi n} \Rightarrow$ ряд тоже разойдется $\Rightarrow$ блуждание возвратно. Теорема доказана.
+\end{proof}
+
+\subsection{Исследование случайного блуждания с помощью характеристической функции}
+
+\begin{thm}
+  Для простого случайного блуждания в $\mathbb{Z}^{d}$
+  \begin{equation*}
+    \Expect N = \lim\limits_{c \uparrow 1} \frac{1}{(2 \pi)^{d}} \int\limits_{[-\pi, \pi]^{d}} \frac{1}{1 - c \varphi (t)}\,dt,
+  \end{equation*}
+  где $\varphi (t)$ "--- характеристическая функция X, $t \in \mathbb{R}^{d}$.
+\end{thm}
+
+\begin{proof}
+  $\int\limits_{[-\pi, \pi]} \frac{e^{inx}}{2 \pi} dx = \begin{cases}
+    1, & n=0 \\ 0, &n \neq 0
+  \end{cases}$. Следовательно,
+  \begin{equation*}
+    \mathbb{I} \lbrace S_{n} = 0 \rbrace  = \prod\limits_{k=1}^{d} \mathbb{I} \lbrace S_{n}^{(k)} = 0 \rbrace = \prod\limits_{k=1}^{d} \int\limits_{[-\pi, \pi]} \frac{e^{i S_{n}^{(k)} t_{k}}}{2 \pi}\,dt_{k} = \frac{1}{(2 \pi)^{d}} \int\limits_{[-\pi, \pi]^{d}} e^{i (S_{n}, t)}\,dt{.}
+  \end{equation*}
+  По теореме Фубини
+  \begin{equation*}
+    \Expect \mathbb{I} (S_{n} = 0) = \Expect \frac{1}{(2 \pi)^{d}} \int\limits_{[-\pi, \pi]^{d}} e^{i (S_{n}, t)}\,dt = \frac{1}{(2 \pi)^{d}} \int\limits_{[-\pi, \pi]^{d}} \Expect e^{i (S_{n}, t)}\,dt.
+  \end{equation*}
+  Заметим, что
+  \begin{equation*}
+    \Expect e^{i (S_{n}, t)} = \prod\limits_{k=1}^{n} \varphi_{X_{k}} (t) = (\varphi (t))^{n}.
+  \end{equation*}
+  Тогда
+  \begin{equation*}
+    \Expect \mathbb{I} (S_{n} = 0) = \Prob(S_{n} = 0) = \frac{1}{(2 \pi)^{d}}\int\limits_{[-\pi, \pi]^{d}} \left(\varphi \left(t\right)\right)^{n}\,dt.
+  \end{equation*}
+  Из этого следует, что
+  \begin{equation*}
+    \sum\limits_{n=0}^{\infty} c^{n} \Prob(S_{n} = 0) = \frac{1}{(2 \pi)^{d}} \int\limits_{[-\pi, \pi]^{d}} \sum\limits_{n=0}^{\infty} (c \varphi(t))^{n}\,dt{,}\quad\text{где $0 < c < 1$}.
+  \end{equation*}
+  Поскольку $|c \varphi| \leqslant c < 1$, то
+  \begin{equation*}
+    \frac{1}{(2 \pi)^{d}} \int\limits_{[-\pi, \pi]^{d}} \sum\limits_{n=0}^{\infty} (c \varphi(t))^{n}\,dt = \frac{1}{(2 \pi)^{d}} \int\limits_{[-\pi, \pi]^{d}} \frac{1}{1 - c \varphi (t)}\,dt
+  \end{equation*}
+  по формуле для суммы бесконечно убывающей геометрической прогрессии. Осталось только заметить, что
+  \begin{equation*}
+    \sum\limits_{n=0}^{\infty} c^{n} \Prob(S_{n} = 0) \rightarrow \sum\limits_{n=0}^{\infty} \Prob(S_{n} = 0) = \Expect N, \quad c \uparrow 1,
+  \end{equation*}
+  что и завершает доказательство теоремы.
+\end{proof}
+
+\begin{cor}
+  При $d \geqslant 3$ простое случайное блуждание невозвратно.
+\end{cor}
+
+\begin{rem}
+  Можно говорить и о случайных блужданиях в $\mathbb{R}^d$, если $X_{i}: \Omega \rightarrow \mathbb{R}^d$. Но тогда о возвратности приходится говорить в терминах бесконечно частого попадания в $\varepsilon$-окрестность точки $x$.
+\end{rem}
+
+\begin{defn}
+  Пусть есть случайное блуждание $S$ на $\mathbb{R}^d$. Тогда \emph{множество возвратности} случайного блуждания $S$ "--- это множество
+  \begin{equation*}
+    R(S) = \lbrace x \in \mathbb{R}^d : \text{блуждание возвратно в окрестности точки } x \rbrace \text{.}
+  \end{equation*}
+\end{defn}
+
+\begin{defn}
+  Пусть есть случайное блуждание $S$ на $\mathbb{R}^d$. Тогда \emph{точки, достижимые случайным блужданием $S$,} "--- это множество $P(S)$ такое, что
+  \begin{equation*}
+    \forall z \in P(S) \; \; \forall \varepsilon > 0 \; \; \exists n \negmedspace : \; \, \Prob( \| S_{n} - z \| < \varepsilon) > 0 \text{.}
+  \end{equation*}
+\end{defn}
+
+\begin{thm}[Чжуна--Фукса]
+  Если $R(S) \neq \emptyset$, то $R(S) = P(S)$.
+\end{thm}
+
+\begin{cor}
+  Если $0 \in R(S)$, то $R(S) = P(S)$; если
+  $0 \notin R(S)$, то  $R(S) = \emptyset$.
+\end{cor}
+
+\section[Лекция от 15.02.17. Ветвящиеся процессы и процессы восстановления]{Лекция от 15.02.17\\ {\large Ветвящиеся процессы и процессы восстановления}}
+
+\subsection{Модель Гальтона--Ватсона}
+
+\begin{mode}
+  Пусть $\lbrace \xi{,} \, \xi_{n, k}{,}\: n, k \in \mathbb{N}\rbrace$ "--- массив независимых одинаково распределенных случайных величин,
+  \begin{equation*}
+    \Prob (\xi = m) = p_{m} \geqslant 0,\; \; m \in \mathbb{Z}_{+} = \lbrace 0, 1, 2, \ldots \rbrace {.}
+  \end{equation*}
+  Такие существуют в силу теоремы Ломницкого--Улама. Положим
+  \begin{equation*}
+    \begin{aligned}
+      & Z_{0} := 1, \text{ а для } n \in \mathbb{N}
+      \\
+      & Z_{n} := \sum\limits_{k=1}^{Z_{n-1}} \xi_{n, k}, \text{ то есть } Z_{n}(\omega) := \sum\limits_{k=1}^{Z_{n-1}(\omega)} \negmedspace \xi_{n,k}(\omega){.}
+    \end{aligned}
+  \end{equation*}
+  Здесь подразумевается, что если $Z_{n-1}(\omega) = 0$, то и вся сумма равна нулю.
+  Таким образом, рассматривается сумма случайного числа случайных величин. Определим
+
+  $A = \lbrace \omega: \exists n = n(\omega),\; Z_{n}(\omega) = 0 \rbrace$ "--- \emph{событие вырождения популяции}.
+  Заметим, что если $Z_{n}(\omega) = 0$, то $Z_{n+1}(\omega) = 0$. Таким образом,
+  \begin{equation*}
+    \lbrace Z_{n} = 0 \rbrace \subset \lbrace Z_{n+1} = 0 \rbrace \text{ и } A = \bigcup\limits_{n=1}^{\infty} \lbrace Z_{n} = 0 \rbrace{.}
+  \end{equation*}
+
+  По свойству непрерывности вероятностной меры,
+  \begin{equation*}
+    \Prob(A) = \lim\limits_{n \to \infty} \Prob(Z_{n} = 0){.}
+  \end{equation*}
+\end{mode}
+
+\begin{defn}
+  Пусть дана последовательность
+  \begin{equation*}
+    (a_{n})_{n=0}^{\infty}, \; \; a_{n} \geqslant 0, \; \; \sum\limits_{n=0}^{\infty} a_{n} = 1. \end{equation*}
+  \emph{Производящая функция} для этой последовательности "--- это
+  \begin{equation*}
+    f(s) := \sum\limits_{k=0}^{\infty} s^{k}a_{k} {,}\; |s| \leqslant 1 \text{ (нас в основном будут интересовать } s \in [0, 1]\text{).}
+  \end{equation*}
+  Заметим, что если $a_{k} = \Prob(Y = k)$, $k = 0, 1, \ldots$ , то
+  \begin{equation*}
+    f_{Y}(s) = \sum\limits_{k=0}^{\infty} s^{k} \Prob(Y = k) = \Expect s^{Y} \! \! {,} \; \; s \in [0, 1]{.}
+  \end{equation*}
+\end{defn}
+
+\begin{lem}
+  Вероятность $\Prob(A)$ является корнем уравнения $\psi(p) = p$, где $\psi = f_{\xi}$ и $p \in [0, 1]$.
+\end{lem}
+
+\begin{proof}
+
+  \begin{multline*}
+    f_{Z_{n}}(s) = \Expect s^{Z_{n}} = \Expect \, \left(s^{\sum\limits_{k=1}^{Z_{n-1}} \xi_{n, k}}\right) = \sum\limits_{j=0}^{\infty} \Expect \left[ \left( s^{\sum\limits_{k=1}^{Z_{n-1}} \xi_{n, k}} \right)  \mathbb{I} \lbrace Z_{n-1} = j \rbrace \right] = \\ = \sum\limits_{j=0}^{\infty} \Expect \left[ \left( s \: ^{\sum\limits_{k=1}^{j} \xi_{n, k}} \right)  \mathbb{I} \lbrace Z_{n-1} = j \rbrace \right].
+  \end{multline*}
+  Поскольку $\sigma \lbrace Z_{r} \rbrace \subset \sigma \lbrace \xi_{m, k}, \; m = 1, \ldots, r, \; k \in \mathbb{N} \rbrace$, которая независима с $\sigma \lbrace \xi_{n, k}, \; k \in \mathbb{N} \rbrace$ (строгое и полное обоснование остается в качестве упражнения), то
+  \begin{multline*}
+    \sum\limits_{j=0}^{\infty} \Expect \left[ \left( s \: ^{\sum\limits_{k=1}^{j} \xi_{n, k}} \right)  \mathbb{I} \lbrace Z_{n-1} = j \rbrace \right]  =  \sum\limits_{j=0}^{\infty} \Expect \left(s \: ^{\sum\limits_{k=1}^{j} \xi_{n, k}}\right) \Expect \mathbb{I} \lbrace Z_{n-1} = j \rbrace  = \\ = \sum\limits_{j=0}^{\infty} \Expect \left(s \: ^{\sum\limits_{k=1}^{j} \xi_{n, k}}\right) \Prob ( Z_{n-1} = j ) = \sum\limits_{j=0}^{\infty} \prod\limits_{k=1}^{j} \Expect s^{\xi_{n, k}} \Prob (Z_{n-1} = j) = \\ = \sum\limits_{j=0}^{\infty} \psi_{\xi}^{j} (s) \Prob (Z_{n-1} = j)  =  f_{Z_{n-1}} \left(\psi_{\xi} \left(s \right) \right)
+  \end{multline*}
+  в силу независимости и одинаковой распределенности $\xi_{n, k}$ и определения производящей функции. Таким образом,
+  \begin{equation*}
+    f_{Z_{n}} (s) = f_{Z_{n-1}} \left( \psi_{\xi} \left(s \right)\right){,}\; s \in [0, 1]{.}
+  \end{equation*}
+  Подставим $s = 0$ и получим, что
+  \begin{equation*}
+    f_{Z_{n}} (0) = f_{Z_{n-1}} \left( \psi_{\xi} \left(0 \right)\right)
+  \end{equation*}
+  Заметим, что
+  \begin{multline*}
+    f_{Z_{n}}(s) = f_{Z_{n-1}}(\psi_{\xi}(s)) = f_{Z_{n-2}} \left(\psi_{\xi} \left( \psi_{\xi} \left(s \right) \right) \right) = \ldots = \underbrace{\psi_{\xi} (\psi_{\xi} \ldots (\psi_{\xi}}_{\text{$n$ итераций}}(s)) \ldots ) = \\ = \psi_{\xi} (f_{Z_{n-1}} (s)){.}
+  \end{multline*}
+  Тогда при $s = 0$ имеем, что
+  \begin{equation*}
+    \Prob (Z_{n} = 0) = \psi_{\xi} \left( \Prob\left(Z_{n-1}=0 \right) \right) {.}
+  \end{equation*}
+  Но
+  \begin{equation*}
+    \Prob(Z_{n} = 0) \nearrow \Prob(A){,}\; n \to \infty \text{,  и  } \psi_{\xi} \text{ непрерывна на } [0, 1]{.}
+  \end{equation*}
+  Переходим к пределу при $n \to \infty$. Тогда
+  \begin{equation*}
+    \Prob(A) = \psi_{\xi} (\Prob(A)){,}
+  \end{equation*}
+  то есть $\Prob(A)$ "--- корень уравнения $p = \psi_{\xi}(p){,}\; p \in [0, 1]$.
+\end{proof}
+
+\begin{thm}
+  Вероятность $p$ вырождения процесса Гальтона--Ватсона есть \textbf{наименьший} корень уравнения
+  \begin{equation}
+    \psi(p) = p{,}\; p \in [0, 1]{,}
+  \end{equation}
+  где $\psi = \psi_{\xi}$.
+\end{thm}
+
+\begin{proof}
+  Пусть $p_{0} := \Prob(\xi = 0) = 0$. Тогда
+  \begin{equation*}
+    \Prob(\xi \geqslant 1) = 1{,}\quad \Prob\left(\bigcap\limits_{n,k} \left\lbrace \xi_{n,k} \geqslant 1 \right\rbrace \right) = 1{.}
+  \end{equation*}
+  Поэтому $Z_{n} \geqslant 1$ при $\forall n$, то есть $\Prob(A)$ "--- наименьший корень уравнения (1).
+  Пусть теперь $p_{0} = 1$. Тогда $\Prob(\xi = 0)=1 \Rightarrow \Prob(A)$ "--- наименьший корень уравнения (1).
+  Пусть, наконец, $0 < p_{0} < 1$. Из этого следует, что $\exists m~\in~\mathbb{N}{:}\;\, p_{m} > 0$, а значит, $\psi$ строго возрастает на $[0, 1]$. Рассмотрим
+  \begin{equation*}
+    \Delta_{n} = \big[\psi_{n}(0),\: \psi_{n+1}\left(0\right)\big){,}\; n = 0, 1, 2, \ldots \; {,} %]
+  \end{equation*}
+  где $\psi_{n}(s)$ "--- это производящая функция $Z_{n}$. Пусть $s \in \Delta_{n}$. Тогда из монотонности $\psi$ на $[0, 1]$ получаем, что
+  \begin{equation*}
+    \psi(s) - s \; > \; \psi(\psi_{n}(0)) - \psi_{n+1}(0) \; = \; \psi_{n+1}(0) - \psi_{n+1}(0) \; = \; 0{,}
+  \end{equation*}
+  что означает, что у уравнения (1) нет корней на $\Delta_{n} \; \forall n \in \mathbb{Z_{+}}$.
+  Заметим, что
+  \begin{equation*}
+    \bigcup\limits_{n=0}^{\infty} \Delta_{n} = \big[0,\: \Prob(A)\big), \; \; \psi_{n}(0) \nearrow \Prob(A){.} %]
+  \end{equation*}
+  По лемме 1 $\Prob(A)$ является корнем уравнения (1). Следовательно, показано, что $\Prob(A)$ "--- наименьший корень, что и требовалось доказать.
+\end{proof}
+
+\begin{thm}
+  Вероятность вырождения $\Prob(A)$ есть нуль $\Leftrightarrow$ $p_{0} = 0$. Пусть $p_{0} > 0$. Тогда при $\Expect \xi \leqslant 1$ имеем $\Prob (A) = 1$, при $\Expect \xi > 1$ имеем $\Prob(A) < 1$.
+\end{thm}
+
+\begin{proof}
+  \textbf{TODO: доказательство теоремы}
+\end{proof}
+
+\begin{cor}
+  Пусть $\Expect \xi < \infty$. Тогда $\Expect Z_{n} = (\Expect \xi)^{n},\; n \in \mathbb{N}{.}$
+\end{cor}
+
+\begin{proof}
+  Доказательство проводится по индукции.
+
+  База индукции: $n=1 \Rightarrow \Expect Z_{1} = \Expect \xi$.
+
+  Индуктивный переход:
+  \begin{equation*}
+    \Expect Z_{n} = \Expect \left( \sum\limits_{k=1}^{Z_{n-1}} \xi_{n,k} \right) = \sum\limits_{j=0}^{\infty} j \, \Expect \xi \Prob (Z_{n-1} = j) = \Expect \xi \, \Expect Z_{n-1} = \left(\Expect \xi \right)^{n}.
+  \end{equation*}
+\end{proof}
+
+\begin{defn}
+
+  \begin{align*}
+    \text{При }& \Expect \xi < 1 \; \text{  процесс называется \emph{докритическим.}}
+    \\
+    \text{При }& \Expect \xi = 1 \; \text{  процесс называется \emph{критическим.}}
+    \\
+    \text{При }& \Expect \xi > 1 \; \text{  процесс называется \emph{надкритическим.}}
+  \end{align*}
+\end{defn}
+
+\subsection{Процессы восстановления}
+
+\begin{defn}
+  Пусть $S_{n} = X_{1} + \ldots + X_{n},\; n \in \mathbb{N},\; X, X_{1}, X_{2}, \ldots$ "--- независимые одинаково распределенные случайные величины, $X \geqslant 0$. Положим
+  \begin{align*}
+    &Z(0) := 0{;}
+    \\
+    &Z(t) := \sup \lbrace n \in \mathbb{N}:\; S_{n} \leqslant t \rbrace{,}\; t > 0{.}
+  \end{align*}
+  (здесь считаем, что $\sup \emptyset := \infty$). Таким образом,
+  \begin{equation*}
+    Z(t, \omega) = \sup \left\lbrace n \in \mathbb{N}: \; S_{n}(\omega) \leqslant t \right\rbrace{.}
+  \end{equation*}
+  Иными словами,
+  \begin{equation*}
+    \lbrace Z(t) \geqslant n \rbrace = \lbrace S_{n} \leqslant t \rbrace{.}
+  \end{equation*}
+  Так определенный процесс $Z(t)$ называется \emph{процессом восстановления}.
+\end{defn}
+
+\begin{rem}
+  Полезно заметить, что
+  \begin{equation*}
+    Z(t) = \sum\limits_{n=1}^{\infty} \mathbb{I} \lbrace S_{n} \leqslant t \rbrace{,}\;\; t > 0{.}
+  \end{equation*}
+\end{rem}
+
+\begin{defn}
+  Рассмотрим \emph{процесс восстановления $\lbrace Z^{\star}(t){,}\; t \geqslant 0 \rbrace$}, который строится по $Y, Y_{1}, Y_{2}, \ldots$ "--- независимым одинаково распределенным случайным величинам, где $\Prob(Y = \alpha) = p \in (0, 1)$; $\Prob(Y = 0) = q = 1-p$. Исключаем из рассмотрения случай, когда $Y = C = const$: если $C = 0$, то $Z(t) = \infty \;\: \forall t > 0$; если же $C > 0$, то $Z(t) = \left[\frac{t}{c}\right]$.
+\end{defn}
+
+\begin{lem}
+  \begin{equation*}
+    \Prob(Z^{\star}(t) = m) =
+    \begin{cases}
+      C_{m}^{j} \, p^{j+1} q^{m-j} {,}\; \text{где } j = \left[\frac{t}{\alpha} \right]&{,}\; \text{если } m \geqslant j{;} \\ 0 &{,}\; \text{если } m < j{,}
+    \end{cases}
+  \end{equation*}
+  где $m = 0, 1, 2, \ldots$ .
+\end{lem}
+
+\begin{defn}
+  $U$ имеет \emph{геометрическое распределение} с параметром $p \in (0, 1)$, если $\Prob(U = k) = (1-p)^{k}p,\; k = 0, 1, 2, \ldots$ .
+\end{defn}
+
+\begin{lem}
+  Рассмотрим независимые геометрические величины $U_{0}, \ldots , U_{j+m}$ с параметром $p \in (0, 1)$. Тогда
+  \begin{equation*}
+    \Prob (j \neq U_{0} + \ldots + U_{j} = m) = \Prob (Z^{\star}(t) = m ){.}
+  \end{equation*}
+\end{lem}
+
+\end{document}
